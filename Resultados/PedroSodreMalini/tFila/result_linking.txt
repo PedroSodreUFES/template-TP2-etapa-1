@@ -1,0 +1,14 @@
+/usr/bin/ld: Resultados/PedroSodreMalini/tFila/main.o: in function `executaConsultaMedica':
+main.c:(.text+0x15ca): undefined reference to `insereDocumentoFila'
+/usr/bin/ld: main.c:(.text+0x1667): undefined reference to `insereDocumentoFila'
+/usr/bin/ld: main.c:(.text+0x16b8): undefined reference to `insereDocumentoFila'
+/usr/bin/ld: Resultados/PedroSodreMalini/tFila/main.o: in function `executaBuscaPaciente':
+main.c:(.text+0x1958): undefined reference to `insereDocumentoFila'
+/usr/bin/ld: Resultados/PedroSodreMalini/tFila/main.o: in function `executaRelatorioGeral':
+main.c:(.text+0x1c39): undefined reference to `insereDocumentoFila'
+/usr/bin/ld: Resultados/PedroSodreMalini/tFila/main.o: in function `InicializaSade':
+main.c:(.text+0x1d79): undefined reference to `criaFila'
+/usr/bin/ld: main.c:(.text+0x2136): undefined reference to `desalocaFila'
+/usr/bin/ld: Resultados/PedroSodreMalini/tFila/main.o: in function `TelaFilaImpressaoFinal':
+main.c:(.text+0x33e1): undefined reference to `imprimeFila'
+collect2: error: ld returned 1 exit status
