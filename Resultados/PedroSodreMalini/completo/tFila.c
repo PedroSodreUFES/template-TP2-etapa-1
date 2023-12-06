@@ -9,13 +9,6 @@ struct tFila{
     int qntd;
 };
 
-struct tDocumento{
-    func_ptr_imprimeEmArquivo printArq;
-    func_ptr_imprimeNaTela printTela;
-    func_ptr_desaloca funcDesaloc;
-    void *tipodedocumento;
-};
-
 tFila *criaFila()
 {
     tFila *f = malloc(sizeof(tFila));
