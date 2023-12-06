@@ -1,2 +1,4 @@
-cc1: fatal error: *.c: No such file or directory
-compilation terminated.
+tFila.c: In function ‘desalocaFila’:
+tFila.c:30:17: warning: unused variable ‘d’ [-Wunused-variable]
+   30 |     tDocumento *d;
+      |                 ^

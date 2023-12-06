@@ -42,7 +42,7 @@ void imprimeNaTelaReceita(void *dado)
         exit(1);
     }
     printf("RECEITUARIO\n");
-    printf("NOME:%s\n\n", r->nomedopaciente);
+    printf("NOME: %s\n\n", r->nomedopaciente);
     if(r->tipo==ORAL)
     {
         printf("USO ORAL\n\n");
@@ -55,14 +55,14 @@ void imprimeNaTelaReceita(void *dado)
     printf("%d %s\n\n", r->quantidade, r->tipodemedicamento);
     printf("%s\n\n", r->instrucaodeuso);
     printf("%s (%s)\n", r->nomedomedico, r->CRM);
-    printf("%s\n", r->data);
+    printf("%s\n\n", r->data);
 }
 
 void imprimeEmArquivoReceita(void *dado, char *path)
 {
     char nome[2000];
     sprintf(nome, "%s/%s", path, NOME_ARQUIVO_RECEITA);
-    FILE *arq = fopen(nome, "w");
+    FILE *arq = fopen(nome, "a");
     tReceita *r = (tReceita*)dado;
     if(r==NULL)
     {
@@ -70,7 +70,7 @@ void imprimeEmArquivoReceita(void *dado, char *path)
         exit(1);
     }
     fprintf(arq, "RECEITUARIO\n");
-    fprintf(arq, "NOME:%s\n\n", r->nomedopaciente);
+    fprintf(arq, "NOME: %s\n\n", r->nomedopaciente);
     if(r->tipo==ORAL)
     {
         fprintf(arq, "USO ORAL\n\n");
@@ -83,6 +83,6 @@ void imprimeEmArquivoReceita(void *dado, char *path)
     fprintf(arq, "%d %s\n\n", r->quantidade, r->tipodemedicamento);
     fprintf(arq, "%s\n\n", r->instrucaodeuso);
     fprintf(arq, "%s (%s)\n", r->nomedomedico, r->CRM);
-    fprintf(arq, "%s\n", r->data);
+    fprintf(arq, "%s\n\n", r->data);
     fclose(arq);
 }

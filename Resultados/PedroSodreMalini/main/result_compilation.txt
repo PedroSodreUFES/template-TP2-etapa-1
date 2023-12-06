@@ -1,0 +1,4 @@
+tFila.c: In function ‘desalocaFila’:
+tFila.c:30:17: warning: unused variable ‘d’ [-Wunused-variable]
+   30 |     tDocumento *d;
+      |                 ^
