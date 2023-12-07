@@ -5,4 +5,6 @@ typedef struct _tPaciente tPaciente;
 
 tPaciente *CriaPaciente();
 
+void DesalocaPaciente(tPaciente *p);
+
 #endif
