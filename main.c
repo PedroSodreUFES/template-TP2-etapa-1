@@ -9,8 +9,6 @@
 
 int main()
 {
-    tMedico *m = CriaMedico();
-    PrintaMedico(m);
-    DesalocaMedico(m);
+
     return 0;
 }

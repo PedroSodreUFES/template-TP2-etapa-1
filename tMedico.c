@@ -65,6 +65,7 @@ void PrintaMedico(tMedico *m)
     printf("CRM: ");
     printf("%s", m->CRM);
     printf("\n");
+    printf("CADASTRO REALIZADO COM SUCESSO. PRESSIONE QUALQUER TECLA PARA\nVOLTAR PARA O MENU INICIAL");
     printf("###############################################################\n");
 }
 
