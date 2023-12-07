@@ -1,0 +1,77 @@
+#include "tSecretario.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct _tSecretario{
+    char nome[101], cpf[20], nascimento[20], telefone[20], genero[20], usuario[21], senha[21], tipo[20];
+};
+
+tSecretario* CriaSecretario()
+{
+    tSecretario *s = malloc(sizeof(tSecretario));
+    if(s==NULL)
+    {
+        printf("SECRETARIO NAO ALOCADO\n");
+        exit(1);
+    }
+    printf("#################### CADASTRO SECRETARIO #######################\n");
+    printf("NOME COMPLETO: ");
+    scanf("%[^\n]%*c", s->nome);
+    s->nome[strlen(s->nome)]= '\0';
+    printf("CPF: ");
+    scanf("%s", s->cpf);
+    printf("DATA DE NASCIMENTO: ");
+    scanf("%s", s->nascimento);
+    printf("TELEFONE: ");
+    scanf("%s", s->telefone);
+    printf("GENERO: ");
+    scanf("%s", s->genero);
+    printf("NOME DE USUARIO: ");
+    scanf("%s", s->usuario);
+    printf("SENHA: ");
+    scanf("%s", s->senha);
+    printf("NIVEL DE ACESSO: ");
+    scanf("%s", s->tipo);
+    scanf("%*c");
+    printf("\n");
+    printf("CADASTRO REALIZADO COM SUCESSO. PRESSIONE QUALQUER TECLA PARA\nVOLTAR PARA O MENU INICIAL\n");
+    printf("###############################################################\n");
+    return s;
+}
+
+void PrintaSecretario(tSecretario *s)
+{
+    if(s==NULL)
+    {
+        printf("SECRETARIO NAO ALOCADO\n");
+        exit(1);
+    }
+    printf("#################### CADASTRO SECRETARIO #######################\n");
+    printf("NOME COMPLETO: ");
+    printf("%s\n", s->nome);
+    printf("CPF: ");
+    printf("%s\n", s->cpf);
+    printf("DATA DE NASCIMENTO: ");
+    printf("%s\n", s->nascimento);
+    printf("TELEFONE: ");
+    printf("%s\n", s->telefone);
+    printf("GENERO: ");
+    printf("%s\n", s->genero);
+    printf("NOME DE USUARIO: ");
+    printf("%s\n", s->usuario);
+    printf("SENHA: ");
+    printf("%s\n", s->senha);
+    printf("NIVEL DE ACESSO: ");
+    printf("%s", s->tipo);
+    printf("\n");
+    printf("###############################################################\n");
+}
+
+void DesalocaSecretario(tSecretario *s)
+{
+    if(s!=NULL)
+    {
+        free(s);
+    }
+}
