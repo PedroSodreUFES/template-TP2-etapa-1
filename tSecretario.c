@@ -34,9 +34,6 @@ tSecretario* CriaSecretario()
     printf("NIVEL DE ACESSO: ");
     scanf("%s", s->tipo);
     scanf("%*c");
-    printf("\n");
-    printf("CADASTRO REALIZADO COM SUCESSO. PRESSIONE QUALQUER TECLA PARA\nVOLTAR PARA O MENU INICIAL\n");
-    printf("###############################################################\n");
     return s;
 }
 
@@ -74,4 +71,28 @@ void DesalocaSecretario(tSecretario *s)
     {
         free(s);
     }
+}
+
+char *retornaCPFsecretario(tSecretario *s)
+{
+    return s->cpf;
+}
+
+char *retornaloginsecretario(tSecretario *s)
+{
+    return s->usuario;
+}
+
+char *retornasenhasecretario(tSecretario *s)
+{
+    return s->senha;
+}
+
+int EhAdmin(tSecretario *s)
+{
+    if(strcmp(s->tipo, "ADMIN")==0)
+    {
+        return 1;
+    }
+    return 0;
 }

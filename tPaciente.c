@@ -5,6 +5,8 @@
 
 struct _tPaciente{
     char nome[101], cpf[20], nascimento[20], telefone[20], genero[20];
+    int nlesoes;
+    void **lesoes;
 };
 
 tPaciente *CriaPaciente()
@@ -19,6 +21,8 @@ tPaciente *CriaPaciente()
     printf("NOME COMPLETO: ");
     scanf("%[^\n]%*c", p->nome);
     p->nome[strlen(p->nome)]= '\0';
+    p->nlesoes=0;
+    p->lesoes=NULL;
     printf("CPF: ");
     scanf("%s", p->cpf);
     printf("DATA DE NASCIMENTO: ");
@@ -41,3 +45,19 @@ void DesalocaPaciente(tPaciente *p)
         free(p);
     }
 }
+
+char * RetornaNome(tPaciente *p)
+{
+    return p->nome;
+}
+
+char* RetornaCPFpaciente(tPaciente *p)
+{
+    return p->cpf;
+}
+
+int retornaNlesoes(tPaciente *p)
+{
+    return p->nlesoes;
+}
+

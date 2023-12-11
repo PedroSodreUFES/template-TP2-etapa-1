@@ -7,4 +7,10 @@ tPaciente *CriaPaciente();
 
 void DesalocaPaciente(tPaciente *p);
 
+char * RetornaNome(tPaciente *p);
+
+char* RetornaCPFpaciente(tPaciente *p);
+
+int retornaNlesoes(tPaciente *p);
+
 #endif

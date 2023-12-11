@@ -9,4 +9,10 @@ void PrintaMedico(tMedico *m);
 
 void DesalocaMedico(tMedico *m);
 
+char *retornaCPFmedico(tMedico *m);
+
+char *retornaloginmedico(tMedico *m);
+
+char *retornasenhamedico(tMedico *m);
+
 #endif

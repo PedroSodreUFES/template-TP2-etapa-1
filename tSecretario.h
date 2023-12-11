@@ -9,4 +9,12 @@ void PrintaSecretario(tSecretario *s);
 
 void DesalocaSecretario(tSecretario *s);
 
+char *retornaCPFsecretario(tSecretario *s);
+
+char *retornaloginsecretario(tSecretario *s);
+
+char *retornasenhasecretario(tSecretario *s);
+
+int EhAdmin(tSecretario *s);
+
 #endif

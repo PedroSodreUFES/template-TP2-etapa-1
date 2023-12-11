@@ -76,3 +76,18 @@ void DesalocaMedico(tMedico *m)
         free(m);
     }
 }
+
+char *retornaCPFmedico(tMedico *m)
+{
+    return m->cpf;
+}
+
+char *retornaloginmedico(tMedico *m)
+{
+    return m->usuario;
+}
+
+char *retornasenhamedico(tMedico *m)
+{
+    return m->senha;
+}
