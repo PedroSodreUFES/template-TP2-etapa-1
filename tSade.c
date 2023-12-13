@@ -5,9 +5,36 @@
 
 struct _tSade
 {
-    void **secretarios, **medicos, **pacientes;
-    int nsecretarios, nmedicos, npacientes;
+    void **secretarios, **medicos, **pacientes, **consultas, **lesoes;
+    int nsecretarios, nmedicos, npacientes, nconsultas, nlesoes;
 };
+
+int VeSePacienteTaRegistrado(tSade *sade, char *cpf)
+{
+    int i;
+    for(i=0 ; i<obtemnpacientes(sade) ; i++)
+    {
+        tPaciente *p = RetornaPaciente(sade, i);
+        if(strcmp(cpf, RetornaCPFpaciente(p))==0)
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+tPaciente *RetornaPacienteCadastrado(tSade *sade, char *cpf)
+{
+    int i;
+    for(i=0 ; i<obtemnpacientes(sade) ; i++)
+    {
+        tPaciente *p = (tPaciente*)RetornaPaciente(sade, i);
+        if(strcmp(cpf, RetornaCPFpaciente(p))==0)
+        {
+            return p;
+        }
+    }
+}
 
 tSade *CriaSade()
 {
@@ -15,9 +42,13 @@ tSade *CriaSade()
     sade->nmedicos=0;
     sade->npacientes=0;
     sade->nsecretarios=0;
+    sade->nconsultas=0;
+    sade->nlesoes=0;
+    sade->lesoes=NULL;
     sade->medicos=NULL;
     sade->pacientes=NULL;
     sade->secretarios=NULL;
+    sade->consultas=NULL;
     return sade;
 }
 
@@ -34,6 +65,12 @@ int obtemnsecretarios(tSade *sade)
 int obtemnpacientes(tSade *sade)
 {
     return sade->npacientes;
+}
+
+
+int obtemnconsultas(tSade *sade)
+{
+    return sade->nconsultas;
 }
 
 void InsereMedico(tSade *sade, tMedico *m)
@@ -57,6 +94,26 @@ void InserePaciente(tSade *sade, tPaciente *p)
     sade->pacientes[obtemnpacientes(sade)-1]= (void*)p;
 }
 
+void InsereConsulta(tSade *sade, tConsulta *consulta)
+{
+    sade->nconsultas++;
+    sade->consultas = realloc(sade->consultas , obtemnconsultas(sade)*sizeof(void*));
+    sade->consultas[obtemnconsultas(sade)-1] = (void*)consulta;
+}
+
+void InsereLesoes(tSade *sade, tLesao *lesao)
+{
+    sade->nlesoes++;
+    sade->lesoes = realloc(sade->lesoes, obtemnlesoes(sade)*sizeof(void*));
+    tLesao *clone = ClonaLesao(lesao);
+    sade->lesoes[obtemnlesoes(sade)-1]=(void*)clone;
+}
+
+int obtemnlesoes(tSade *sade)
+{
+    return sade->nlesoes;
+}
+
 void PrintaMenuSecretarioUser()
 {
     printf("####################### MENU PRINCIPAL #########################\nESCOLHA UMA OPCAO:\n      (2) CADASTRAR MEDICO\n      (3) CADASTRAR PACIENTE\n      (5) BUSCAR PACIENTES\n      (6) RELATORIO GERAL\n      (7) FILA DE IMPRESSAO\n      (8) FINALIZAR O PROGRAMA\n###############################################################\n");
@@ -70,52 +127,6 @@ void PrintaMenuMedico()
 void PrintaMenuSecretarioAdmin()
 {
         printf("####################### MENU PRINCIPAL #########################\nESCOLHA UMA OPCAO:\n      (1) CADASTRAR SECRETARIO\n      (2) CADASTRAR MEDICO\n      (3) CADASTRAR PACIENTE\n      (4) REALIZAR CONSULTA\n      (5) BUSCAR PACIENTES\n      (6) RELATORIO GERAL\n      (7) FILA DE IMPRESSAO\n      (8) FINALIZAR O PROGRAMA\n###############################################################\n");
-}
-
-void BuscaPaciente(tSade *sade)
-{
-    char nome[101];
-    scanf("%[^\n]%*c", nome);
-    int i, n=1, a=0;
-    tPaciente *p;
-    printf("#################### BUSCAR PACIENTES #######################\n");
-    for(i=0 ; i<obtemnpacientes(sade) ; i++)
-    {
-        p = (tPaciente*)sade->pacientes[i];
-        if(strcmp(nome, RetornaNome(p))==0)
-        {
-            if(a==0)
-            {
-                a=1;
-                printf("PACIENTES ENCONTRADOS:\n");
-            }
-            printf("%d - %s (%s)\n", n, RetornaNome(p), RetornaCPFpaciente(p));
-            n++;
-        }
-    }
-    if(a==0)
-    {
-        printf("NENHUM PACIENTE FOI ENCONTRADO. PRESSIONE QUALQUER TECLA PARA RETORNAR AO MENU ANTERIOR \n############################################################\n");
-        return;
-    }
-    else
-    {
-        printf("\n");
-        printf("SELECIONE UMA OPÇÃO:\n");
-        printf("    (1) ENVIAR LISTA PARA IMPRESSAO\n");
-        printf("    (2) RETORNAR AO MENU PRINCIPAL\n");
-        printf("############################################################\n");
-        scanf("%d", &n);
-        if(n==1)
-        {
-            printf("#################### BUSCAR PACIENTES #######################\nLISTA ENVIADA PARA FILA DE IMPRESSAO. PRESSIONE QUALQUER TECLA PARA RETORNAR AO MENU PRINCIPAL\n############################################################\n");
-            //como envia????
-        }
-        else if(n==2)
-        {
-            return;
-        }
-    }
 }
 
 int CPFInvalido(char *cpfpradentro, char* cpfdobanco)
@@ -145,6 +156,12 @@ tPaciente *RetornaPaciente(tSade *sade, int indice)
     return p;
 }
 
+tLesao *RetornaLesao(tSade *sade, int indice)
+{
+    tLesao *l = (tLesao*)sade->lesoes[indice];
+    return l;
+}
+
 int EhMesmoLogin(char *login1, char *login2, char *senha1, char *senha2)
 {
     if(strcmp(login1, login2)==0 && strcmp(senha1, senha2)==0)
@@ -152,4 +169,24 @@ int EhMesmoLogin(char *login1, char *login2, char *senha1, char *senha2)
         return 1;
     }
     return 0;
+}
+
+int CalculaIdadePessoa(tPaciente *p, char *dataatual)
+{
+    int dia1, mes1, ano1, dia2, mes2, ano2, idade;
+    sscanf(retornadatapaciente(p), "%d/%d/%d", &dia1, &mes1, &ano1);
+    sscanf(dataatual, "%d/%d/%d", &dia2, &mes2, &ano2);
+    idade = ano2 - ano1;
+    if(mes2<mes1)
+    {
+        idade--;
+    }
+    else if(mes1 == mes2)
+    {
+        if(dia2<dia1)
+        {
+            idade--;
+        }
+    }
+    return idade;
 }

@@ -15,4 +15,8 @@ char *retornaloginmedico(tMedico *m);
 
 char *retornasenhamedico(tMedico *m);
 
+char *retornanomemedico(tMedico *m);
+
+char *retornacrmmedico(tMedico *m);
+
 #endif

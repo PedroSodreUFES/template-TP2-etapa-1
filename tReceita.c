@@ -9,8 +9,7 @@ struct tReceita{
     char nomedopaciente[150], nomedomedicamento[51], tipodemedicamento[51], instrucaodeuso[301], nomedomedico[150], CRM[21], data[16];
 };
 
-tReceita *criaReceita(char *nomePaciente, eTipoUso tipoUso, char *nomeMedicamento, char *tipoMedicamento, char *instrucoes, int qntd, char *nomeMedico, char *CRM, char *dataStr)
-{
+tReceita *criaReceita(char *nomePaciente, eTipoUso tipoUso, char *nomeMedicamento, char *tipoMedicamento, char *instrucoes, int qntd, char *nomeMedico, char *CRM, char *dataStr){
     tReceita *receita = (tReceita*)malloc(sizeof(tReceita));
     strcpy(receita->nomedopaciente, nomePaciente);
     receita->tipo=tipoUso;

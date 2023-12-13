@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 struct _tSecretario{
-    char nome[101], cpf[20], nascimento[20], telefone[20], genero[20], usuario[21], senha[21], tipo[20];
+    char nome[101], cpf[20], nascimento[20], telefone[20], genero[20], usuario[21], senha[21], tipo[12];
 };
 
 tSecretario* CriaSecretario()

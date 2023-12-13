@@ -35,8 +35,6 @@ tMedico *CriaMedico()
     scanf("%s", m->senha);
     scanf("%*c");
     printf("\n");
-    printf("CADASTRO REALIZADO COM SUCESSO. PRESSIONE QUALQUER TECLA PARA\nVOLTAR PARA O MENU INICIAL\n");
-    printf("###############################################################\n");
     return m;
 }
 
@@ -65,7 +63,7 @@ void PrintaMedico(tMedico *m)
     printf("CRM: ");
     printf("%s", m->CRM);
     printf("\n");
-    printf("CADASTRO REALIZADO COM SUCESSO. PRESSIONE QUALQUER TECLA PARA\nVOLTAR PARA O MENU INICIAL");
+    printf("CADASTRO REALIZADO COM SUCESSO. PRESSIONE QUALQUER TECLA PARA VOLTAR PARA O MENU INICIAL");
     printf("###############################################################\n");
 }
 
@@ -90,4 +88,14 @@ char *retornaloginmedico(tMedico *m)
 char *retornasenhamedico(tMedico *m)
 {
     return m->senha;
+}
+
+char *retornanomemedico(tMedico *m)
+{
+    return m->nome;
+}
+
+char *retornacrmmedico(tMedico *m)
+{
+    return m->CRM;
 }

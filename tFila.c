@@ -20,7 +20,6 @@ tFila *criaFila()
 void desalocaFila(tFila *f)
 {
     int i;
-    tDocumento *d;
     for(i=0 ; i<quantidadeDocumentosNaFila(f) ; i++)
     {
         if(f->vet[i]!=NULL)

@@ -5,8 +5,7 @@
 
 struct _tPaciente{
     char nome[101], cpf[20], nascimento[20], telefone[20], genero[20];
-    int nlesoes;
-    void **lesoes;
+    int consultado;
 };
 
 tPaciente *CriaPaciente()
@@ -21,8 +20,7 @@ tPaciente *CriaPaciente()
     printf("NOME COMPLETO: ");
     scanf("%[^\n]%*c", p->nome);
     p->nome[strlen(p->nome)]= '\0';
-    p->nlesoes=0;
-    p->lesoes=NULL;
+    p->consultado=0;
     printf("CPF: ");
     scanf("%s", p->cpf);
     printf("DATA DE NASCIMENTO: ");
@@ -33,10 +31,9 @@ tPaciente *CriaPaciente()
     scanf("%s", p->genero);
     scanf("%*c");
     printf("\n");
-    printf("CADASTRO REALIZADO COM SUCESSO. PRESSIONE QUALQUER TECLA PARA\nVOLTAR PARA O MENU INICIAL\n");
-    printf("###############################################################\n");
     return p;
 }
+
 
 void DesalocaPaciente(tPaciente *p)
 {
@@ -56,8 +53,31 @@ char* RetornaCPFpaciente(tPaciente *p)
     return p->cpf;
 }
 
-int retornaNlesoes(tPaciente *p)
+char *retornadatapaciente(tPaciente *p)
 {
-    return p->nlesoes;
+    return p->nascimento;
 }
 
+void JaFoiConsultado(tPaciente *p)
+{
+    p->consultado=1;
+}
+
+int obtemSeFoiConsultado(tPaciente *p)
+{
+    if(p->consultado==1)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+int obtemIdadePaciente(tPaciente *p)
+{
+    //fazer
+}
+
+char *ObtemGeneroPaciente(tPaciente *p)
+{
+    return p->genero;
+}

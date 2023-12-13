@@ -1,8 +1,28 @@
 #ifndef _TCONSULTA_H_
 #define _TCONSULTA_H_
 
-#include "tSade.h"
+#include "tPaciente.h"
+#include "tMedico.h"
+#include "tLesao.h"
 
+typedef struct _tConsulta tConsulta;
 
+void PrintaMenuConsulta();
+
+tConsulta *CriaConsulta(tPaciente *p);
+
+char *ConsultaNomePaciente(tConsulta *c);
+
+char *ConsultaNomeMedico(tConsulta *c);
+
+char *ConsultaData(tConsulta *c);
+
+int retornanlesoesconsulta(tConsulta *c);
+
+void InsereLesoesNaConsulta(tConsulta *consulta, tLesao *lesao);
+
+tLesao *PegaLesaoComIndice(tConsulta *consulta, int i);
+
+int NaoPrecisaCirurgia(tConsulta *c);
 
 #endif
