@@ -17,7 +17,8 @@ tBiopsia *CriaBiopsia(tConsulta *consulta, char *cpf)
     b->nlesoes=0;
     b->nomemedico[0]='\0';
     strcpy(b->nomepaciente, ConsultaNomePaciente(consulta));
-    strcpy(b->cpf, cpf);
+    strcpy(b->cpf, ConsultaCPF(consulta));
+    strcpy(b->data, ConsultaData(consulta));
     int i;
     for(i=0 ; i<retornanlesoesconsulta(consulta) ; i++)
     {
@@ -27,7 +28,6 @@ tBiopsia *CriaBiopsia(tConsulta *consulta, char *cpf)
         }
     }
     b->crmmedico[0]='\0';
-    strcpy(b->data, ConsultaData(consulta));
 }
 
 void InsereLesaoBiopsia(tBiopsia *biopsia, tLesao *lesao)
@@ -46,6 +46,10 @@ int NumeroDeLesoesBiopsia(tBiopsia *biopsia)
 void desalocaBiopsia(void *dado)
 {
     tBiopsia *b = (tBiopsia*)dado;
+    if(b->lesoes!=NULL)
+    {
+        free(b->lesoes);
+    }
     if(b!=NULL)
     {
         free(b);
@@ -93,7 +97,7 @@ void imprimeEmArquivoBiopsia(void *dado, char *path)
         fprintf(arq, "L%d - %s - %s - %dMM\n", i+1 , retornadiagnosticolesao(b->lesoes[i]) , retornaregiaolesao(b->lesoes[i]) , tamanhodalesao(b->lesoes[i]));
     }
     fprintf(arq, "\n");
-    fprintf(arq, "%s (%s)\n", b->nomemedico, b->crmmedico);
+    fprintf(arq, " ()\n"/*, b->nomemedico, b->crmmedico*/);
     fprintf(arq, "%s\n\n", b->data);
     fclose(arq);
 }

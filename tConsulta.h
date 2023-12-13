@@ -25,4 +25,8 @@ tLesao *PegaLesaoComIndice(tConsulta *consulta, int i);
 
 int NaoPrecisaCirurgia(tConsulta *c);
 
+char *ConsultaCPF(tConsulta *c);
+
+void DesalocaConsulta(tConsulta *c);
+
 #endif

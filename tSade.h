@@ -7,6 +7,7 @@ typedef struct _tSade tSade;
 #include "tPaciente.h"
 #include "tSecretario.h"
 #include "tConsulta.h"
+#include "tLesao.h"
 
 int obtemnlesoes(tSade *sade);
 
@@ -42,6 +43,8 @@ void PrintaMenuSecretarioAdmin();
 
 int CPFInvalido(char *cpfpradentro, char* cpfdobanco);
 
+tConsulta *RetornaConsulta(tSade *sade, int indice);
+
 tMedico *RetornaMedico(tSade* sade, int indice);
 
 tSecretario *RetornaSecretario(tSade* sade, int indice);
@@ -53,5 +56,11 @@ tLesao *RetornaLesao(tSade *sade, int indice);
 int EhMesmoLogin(char *login1, char *login2, char *senha1, char *senha2);
 
 int CalculaIdadePessoa(tPaciente *p, char *dataatual);
+
+void DesalocaSade(tSade *sade);
+
+void GeraBinario(tSade*sade);
+
+tSade *LeSade(tSade *sade, FILE *arquivo);
 
 #endif

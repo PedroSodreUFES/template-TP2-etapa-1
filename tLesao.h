@@ -21,4 +21,6 @@ int retornalesaocrioterapia(tLesao *lesao);
 
 tLesao *ClonaLesao(tLesao *lesao);
 
+void DesalocaLesao(tLesao *lesao);
+
 #endif

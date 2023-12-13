@@ -10,7 +10,7 @@ struct _tBusca{
 
 tBusca *criabusca(tSade *sade)
 {
-    tBusca *busca = malloc(1 * sizeof(tBusca));
+    tBusca *busca = calloc(1, sizeof(tBusca));
     char nome[101];
     int i, n=1, a=0;
     tPaciente *p;
@@ -62,8 +62,14 @@ int BuscaNpacientes(tBusca *busca)
 void desalocaBusca(void *dado)
 {
     tBusca *busca = (tBusca*)dado;
-    free(busca->pacientes);
-    free(busca);
+    if(busca->pacientes!=NULL)
+    {
+        free(busca->pacientes);
+    }
+    if(busca!=NULL)
+    {
+        free(busca);
+    }
 }
 
 void imprimeEmArquivoBusca(void *dado, char *path)
@@ -72,7 +78,7 @@ void imprimeEmArquivoBusca(void *dado, char *path)
     char nome[2000];
     sprintf(nome, "%s/%s", path, "lista_busca.txt");
     FILE *arq;
-    arq = fopen(nome, "w");
+    arq = fopen(nome, "a");
     if(busca==NULL)
     {
         printf("Nao recebi uma busca\n");

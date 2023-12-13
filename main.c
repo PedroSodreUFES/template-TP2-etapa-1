@@ -55,18 +55,21 @@ int main(int argc, char** argv)
     SE O BANCO DE DADOS NAO EXISTE
     ..............................
     */
-    //if(arq==NULL)
-    //{
+    if(arq==NULL)
+    {
         sade = CriaSade();
         tSecretario *s = CriaSecretario();
         InsereSecretario(sade, s);
-    //}
+    }
     /*
     ..........................
     SE O BANCO DE DADOS EXISTE
     ..........................
     */
-
+    else
+    {
+        LeSade(sade, arq);
+    }
     /*
     ..............................
     login e indicar quem ta usando
@@ -85,7 +88,6 @@ int main(int argc, char** argv)
             tMedico *m = (tMedico*)RetornaMedico(sade, i);
             if(EhMesmoLogin(retornaloginmedico(m), login, retornasenhamedico(m), senha))
             {
-                usuariomedico=m;
                 medico=1;
                 break;
             }
@@ -99,7 +101,6 @@ int main(int argc, char** argv)
             tSecretario *s = (tSecretario*)RetornaSecretario(sade, i);
             if(EhMesmoLogin(retornaloginsecretario(s), login, retornasenhasecretario(s), senha))
             {
-                usuariosecretario=s;
                 if(EhAdmin(s))
                 {
                     secretarioadmin=1;
@@ -231,7 +232,6 @@ int main(int argc, char** argv)
                 //printf("passou\n");
                 c = CriaConsulta(RetornaPacienteCadastrado(sade, cpf));
                 JaFoiConsultado(RetornaPacienteCadastrado(sade, cpf));
-                InsereConsulta(sade, c);
                 printf("############################################################\n");
             }
             else
@@ -348,7 +348,7 @@ int main(int argc, char** argv)
             printf("#################### BUSCAR PACIENTES #######################\n");
             printf("ESCOLHA UMA OPCAO:\n	(1) ENVIAR LISTA PARA IMPRESSAO\n	(2) RETORNAR AO MENU PRINCIPAL\n");
             printf("############################################################\n\n");
-            scanf("%d", &opcao);
+            scanf("%d%*c", &opcao);
             if(opcao==1)
             {
                 insereDocumentoFila(fila, (void*)b, imprimeBuscaNaTela, imprimeEmArquivoBusca, desalocaBusca);
@@ -375,7 +375,7 @@ int main(int argc, char** argv)
             printf("    (1) ENVIAR PARA IMPRESSAO\n");
             printf("    (2) RETORNAR AO MENU PRINCIPAL\n");
             printf("############################################################\n\n");
-            scanf("%d", &opcao);
+            scanf("%d%*c", &opcao);
             if(opcao==1)
             {
                 insereDocumentoFila(fila, (void*)r, imprimeNaTelaRelatorio, imprimeEmArquivoRelatorio, desalocaRelatorio);
@@ -385,7 +385,7 @@ int main(int argc, char** argv)
             }
             else
             {
-                //free(r);
+                desalocaRelatorio(r);
             }
         }
 
@@ -426,10 +426,9 @@ int main(int argc, char** argv)
             break;
         }
     }
-    /*
-    SalvaSade();
-    DesalocaSade();
-    */
-    //desalocaFila(fila);
+    GeraBinario(sade);
+    DesalocaSade(sade);
+    desalocaFila(fila);
+    fclose(arq);
     return 0;
 }

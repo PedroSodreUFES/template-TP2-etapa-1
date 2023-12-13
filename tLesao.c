@@ -79,6 +79,12 @@ int tamanhodalesao(tLesao *lesao)
     return lesao->tamanho;
 }
 
-
+void DesalocaLesao(tLesao *lesao)
+{
+    if(lesao!=NULL)
+    {
+        free(lesao);
+    }
+}
 
 

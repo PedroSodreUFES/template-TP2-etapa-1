@@ -253,11 +253,11 @@ EXECUTANDO O VALGRIND EM CADA CASO:
  - Resultado para o saida.txt: Incorreto!
  - Pasta completo / Caso 1:
  - Valgrind: Incorreto! Verifique se o binário prog foi gerado corretamente. Ou se o Valgrind está instalado.
- - O aluno não gerou o arquivo de saída Resultados/PedroSodreMalini/completo/Casos/1/saida/biopsia.txt, considerando resultado incorreto!
- - O aluno não gerou o arquivo de saída Resultados/PedroSodreMalini/completo/Casos/1/saida/encaminhamento.txt, considerando resultado incorreto!
- - O aluno não gerou o arquivo de saída Resultados/PedroSodreMalini/completo/Casos/1/saida/lista_busca.txt, considerando resultado incorreto!
- - O aluno não gerou o arquivo de saída Resultados/PedroSodreMalini/completo/Casos/1/saida/receita.txt, considerando resultado incorreto!
- - O aluno não gerou o arquivo de saída Resultados/PedroSodreMalini/completo/Casos/1/saida/relatorio_geral.txt, considerando resultado incorreto!
+ - Resultado para o biopsia.txt: Incorreto!
+ - Resultado para o encaminhamento.txt: Incorreto!
+ - Resultado para o lista_busca.txt: Incorreto!
+ - Resultado para o receita.txt: Incorreto!
+ - Resultado para o relatorio_geral.txt: Incorreto!
  - Resultado para o saida.txt: Incorreto!
  - Pasta completo / Caso 2:
  - Valgrind: Incorreto! Verifique se o binário prog foi gerado corretamente. Ou se o Valgrind está instalado.

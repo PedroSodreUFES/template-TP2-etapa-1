@@ -12,7 +12,6 @@ tRelatorio *CriaRelatorio(tSade *sade)
     tRelatorio *relatorio = malloc(sizeof(tRelatorio));
     int i;
     int nconsultados=0;
-    //ja consultados
     for(i=0 ; i<obtemnpacientes(sade) ; i++)
     {
         if(obtemSeFoiConsultado(RetornaPaciente(sade, i)))

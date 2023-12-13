@@ -23,19 +23,20 @@ tConsulta *CriaConsulta(tPaciente *p)
     consulta->lesoes=NULL;
     consulta->nlesoes=0;
     strcpy(consulta->nomedopaciente, RetornaNome(p));
+    strcpy(consulta->cpfdopaciente, RetornaCPFpaciente(p));
     consulta->nomedomedico[0]='\0';
     printf("---\n");
     printf("-NOME: %s\n", consulta->nomedopaciente);
     printf("-DATA DE NASCIMENTO: %s\n", retornadatapaciente(p));
     printf("---\n");
     printf("DATA DA CONSULTA: ");
-    scanf("%s", consulta->data);
+    scanf("%s%*c", consulta->data);
     printf("POSSUI DIABETES: ");
-    scanf("%d", &consulta->diabetes);
+    scanf("%d%*c", &consulta->diabetes);
     printf("FUMANTE: ");
-    scanf("%d", &consulta->fumante);
+    scanf("%d%*c", &consulta->fumante);
     printf("ALERGIA A MEDICAMENTO: ");
-    scanf("%d", &consulta->alergia);
+    scanf("%d%*c", &consulta->alergia);
     printf("HISTORICO DE CANCER: ");
     scanf("%d%*c", &consulta->cancer);
     printf("TIPO DE PELE: ");
@@ -66,7 +67,7 @@ int retornanlesoesconsulta(tConsulta *c)
 
 void InsereLesoesNaConsulta(tConsulta *consulta, tLesao *lesao)
 {
-    consulta->nlesoes++;
+    consulta->nlesoes+=1;
     consulta->lesoes = realloc(consulta->lesoes, retornanlesoesconsulta(consulta)*sizeof(void*));
     consulta->lesoes[retornanlesoesconsulta(consulta)-1]=(void*)lesao;
 }
@@ -88,4 +89,27 @@ int NaoPrecisaCirurgia(tConsulta *c)
         }
     }
     return 1;
+}
+
+
+char *ConsultaCPF(tConsulta *c)
+{
+    return c->cpfdopaciente;
+}
+
+void DesalocaConsulta(tConsulta *c)
+{
+    int i;
+    for(i=0 ; i<retornanlesoesconsulta(c) ; i++)
+    {
+        DesalocaLesao(PegaLesaoComIndice(c, i));
+    }
+    if(c->lesoes!=NULL)
+    {
+        free(c->lesoes);
+    }
+    if(c!=NULL)
+    {
+        free(c);
+    }
 }

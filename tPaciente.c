@@ -72,11 +72,6 @@ int obtemSeFoiConsultado(tPaciente *p)
     return 0;
 }
 
-int obtemIdadePaciente(tPaciente *p)
-{
-    //fazer
-}
-
 char *ObtemGeneroPaciente(tPaciente *p)
 {
     return p->genero;

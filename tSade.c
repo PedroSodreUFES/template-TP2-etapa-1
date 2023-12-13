@@ -138,6 +138,12 @@ int CPFInvalido(char *cpfpradentro, char* cpfdobanco)
     return 0;
 }
 
+tConsulta *RetornaConsulta(tSade *sade, int indice)
+{
+    tConsulta *c  = (tConsulta*)sade->consultas[indice];
+    return c;
+}
+
 tMedico *RetornaMedico(tSade* sade, int indice)
 {
     tMedico *m = (tMedico*)sade->medicos[indice];
@@ -189,4 +195,74 @@ int CalculaIdadePessoa(tPaciente *p, char *dataatual)
         }
     }
     return idade;
+}
+
+
+/*struct _tSade
+{
+    void **secretarios, **medicos, **pacientes, **consultas, **lesoes;
+    int nsecretarios, nmedicos, npacientes, nconsultas, nlesoes;
+};*/
+
+void DesalocaSade(tSade *sade)
+{
+    int i;
+    for(i=0 ; i<obtemnsecretarios(sade); i++)
+    {
+        DesalocaSecretario(RetornaSecretario(sade, i));
+    }
+    if(sade->secretarios!=NULL)
+    {
+        free(sade->secretarios);
+    }
+
+    for(i=0 ; i<obtemnmedicos(sade) ; i++)
+    {
+        DesalocaMedico(RetornaMedico(sade, i));
+    }
+    if(sade->medicos!=NULL)
+    {
+        free(sade->medicos);
+    }
+    
+    for(i=0 ; i<obtemnpacientes(sade) ; i++)
+    {   
+        DesalocaPaciente(RetornaPaciente(sade, i));
+    }
+    if(sade->pacientes!=NULL)
+    {
+        free(sade->pacientes);
+    }
+    
+    for(i=0 ; i<obtemnlesoes(sade) ; i++)
+    {
+        DesalocaLesao(RetornaLesao(sade, i));
+    }
+    if(sade->lesoes!=NULL)
+    {
+        free(sade->lesoes);
+    }
+    for(i=0 ; i<obtemnconsultas(sade) ; i++)
+    {
+        DesalocaConsulta(RetornaConsulta(sade, i));
+    }
+    if(sade->consultas!=NULL)
+    {
+        free(sade->consultas);
+    }
+
+    if(sade!=NULL)
+    {
+        free(sade);
+    }
+}
+
+void GeraBinario(tSade*sade)
+{
+
+}
+
+tSade *LeSade(tSade *sade, FILE *arquivo)
+{
+    
 }
