@@ -263,6 +263,7 @@ void GeraBinario(tSade *sade, char *path)
     fwrite(&sade->nconsultas, sizeof(int), 1, arq);
     fwrite(&sade->nmedicos, sizeof(int), 1, arq);
 
+    printf("do nada\n");
     int i;
     for(i=0 ; i<obtemnsecretarios(sade) ; i++)
     {

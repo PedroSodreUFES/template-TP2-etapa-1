@@ -428,7 +428,7 @@ int main(int argc, char** argv)
     {
         fclose(arq);
     }
-    
+
     GeraBinario(sade, path);
     DesalocaSade(sade);
     desalocaFila(fila);

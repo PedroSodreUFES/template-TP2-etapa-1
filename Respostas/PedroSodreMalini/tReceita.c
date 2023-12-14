@@ -84,6 +84,14 @@ void imprimeEmArquivoReceita(void *dado, char *path)
     fprintf(arq, "%d %s\n\n", r->quantidade, r->tipodemedicamento);
     fprintf(arq, "%s\n\n", r->instrucaodeuso);
     fprintf(arq, "%s (%s)\n", r->nomedomedico, r->CRM);
-    fprintf(arq, "%d/%d/%d\n\n", dia , mes, ano);
+    if(dia<10)
+    {
+        fprintf(arq, "%d", dia%10);
+    }
+    else
+    {
+        fprintf(arq, "%d", dia);
+    }
+    fprintf(arq, "/%d/%d\n\n", mes, ano);
     fclose(arq);
 }

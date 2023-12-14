@@ -65,12 +65,33 @@ void imprimeEmArquivoEncaminhamento(void *dado, char *path)
         printf("Nao recebi uma biopsia\n");
         exit(1);
     }
+    int i=0;
+    //sscanf(b->data, "%d/%d/%d", &dia, &mes, &ano);
     fprintf(arq, "PACIENTE: %s\n", b->nomepaciente);
     fprintf(arq, "CPF: %s\n\n", b->cpf);
     fprintf(arq, "ESPECIALIDADE ENCAMINHADA: %s\n", b->especialidade);
     fprintf(arq, "MOTIVO: %s\n\n", b->motivo);
     fprintf(arq, "%s (%s)\n", b->nomedomedico, b->crm);
-    fprintf(arq, "%s\n\n", b->data);
+    /*if(dia<10)
+    {
+        fprintf(arq"%1d", dia);
+    }
+    else
+    {
+        fprintf("%d", dia);
+    }
+    fprintf(arq, "/%d/%d\n\n", mes, ano);
+    */
+    if(b->data[0]=='0')
+    {
+        i=1;
+    }
+    for(i ; i<strlen(b->data) ; i++)
+    {
+        fprintf(arq ,"%c", b->data[i]);
+    }
+    fprintf(arq, "\n\n");
+
     fclose(arq);
 }
 

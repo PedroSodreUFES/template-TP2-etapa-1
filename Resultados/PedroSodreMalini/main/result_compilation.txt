@@ -1,0 +1,4 @@
+tEncaminhamento.c: In function ‘imprimeEmArquivoEncaminhamento’:
+tEncaminhamento.c:89:5: warning: statement with no effect [-Wunused-value]
+   89 |     for(i ; i<strlen(b->data) ; i++)
+      |     ^~~
