@@ -9,7 +9,7 @@ struct _tMedico{
 
 tMedico *CriaMedico()
 {
-    tMedico *m = malloc(sizeof(tMedico));
+    tMedico *m = calloc(1, sizeof(tMedico));
     if(m==NULL)
     {
         printf("MEDICO NAO ALOCADO\n");
@@ -98,4 +98,17 @@ char *retornanomemedico(tMedico *m)
 char *retornacrmmedico(tMedico *m)
 {
     return m->CRM;
+}
+
+void BinarioMedico(void *dado, FILE *arq)
+{
+    tMedico *m = (tMedico*)dado;
+    fwrite(m, sizeof(tMedico), 1, arq);
+}
+
+void *BM(FILE *arq)
+{
+    tMedico *m = calloc(1, sizeof(tMedico));
+    fread(m, sizeof(tMedico), 1, arq);
+    return (void*)m;
 }

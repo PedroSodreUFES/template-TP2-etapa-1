@@ -8,6 +8,8 @@ typedef struct _tSade tSade;
 #include "tSecretario.h"
 #include "tConsulta.h"
 #include "tLesao.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 int obtemnlesoes(tSade *sade);
 
@@ -59,8 +61,8 @@ int CalculaIdadePessoa(tPaciente *p, char *dataatual);
 
 void DesalocaSade(tSade *sade);
 
-void GeraBinario(tSade*sade);
+void GeraBinario(tSade*sade, char *path);
 
-tSade *LeSade(tSade *sade, FILE *arquivo);
+tSade *LeSade(FILE *arquivo);
 
 #endif

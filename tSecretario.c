@@ -9,7 +9,7 @@ struct _tSecretario{
 
 tSecretario* CriaSecretario()
 {
-    tSecretario *s = malloc(sizeof(tSecretario));
+    tSecretario *s = calloc(1, sizeof(tSecretario));
     if(s==NULL)
     {
         printf("SECRETARIO NAO ALOCADO\n");
@@ -95,4 +95,17 @@ int EhAdmin(tSecretario *s)
         return 1;
     }
     return 0;
+}
+
+void BinarioSecretario(void *dado, FILE *arq)
+{
+    tSecretario *s = (tSecretario*)dado;
+    fwrite(s, sizeof(tSecretario), 1 , arq);
+}
+
+void *SB(FILE *arq)
+{
+    tSecretario *s = malloc(sizeof(tSecretario));
+    fread(s, sizeof(tSecretario), 1, arq);
+    return (void*)s;
 }

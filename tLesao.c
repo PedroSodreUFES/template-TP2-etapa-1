@@ -11,13 +11,15 @@ struct _tlesao{
 
 tLesao *CadastraLesao()
 {
-    tLesao *lesao = malloc(sizeof(tLesao));
+    tLesao *lesao = calloc(1, sizeof(tLesao));
     char botao;
     printf("#################### CONSULTA MEDICA #######################\nCADASTRO DE LESAO:\n");
     printf("DIAGNOSTICO CLINICO: ");
-    scanf("%s%*c", lesao->diagnostico);
+    scanf("%[^\n]%*c", lesao->diagnostico);
+    lesao->diagnostico[strlen(lesao->diagnostico)]='\0';
     printf("REGIAO DO CORPO: ");
-    scanf("%s%*c", lesao->regiao);
+    scanf("%[^\n]%*c", lesao->regiao);
+    lesao->regiao[strlen(lesao->regiao)]='\0';
     printf("TAMANHO: ");
     scanf("%d%*c", &lesao->tamanho);
     printf("ENVIAR PARA A CIRURGIA: ");
@@ -31,7 +33,7 @@ tLesao *CadastraLesao()
 
 tLesao *ClonaLesao(tLesao *lesao)
 {
-    tLesao *clone = malloc(sizeof(tLesao));
+    tLesao *clone = calloc(1, sizeof(tLesao));
     strcpy(clone->regiao, lesao->regiao);
     strcpy(clone->diagnostico, lesao->diagnostico);
     clone->tamanho = lesao->tamanho;
@@ -87,4 +89,16 @@ void DesalocaLesao(tLesao *lesao)
     }
 }
 
+void BinarioLesoes(void *dado, FILE *arq)
+{
+    tLesao *l = (tLesao*)dado;
+    fwrite(l, sizeof(tLesao), 1, arq);
+}
+
+void *BL(FILE* arq)
+{
+    tLesao *l = calloc(1, sizeof(tLesao));
+    fread(l, sizeof(tLesao), 1, arq);
+    return (void*)l;
+}
 

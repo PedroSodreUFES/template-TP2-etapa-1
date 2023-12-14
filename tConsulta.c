@@ -19,7 +19,7 @@ void PrintaMenuConsulta()
 
 tConsulta *CriaConsulta(tPaciente *p)
 {
-    tConsulta *consulta = malloc(sizeof(tConsulta));
+    tConsulta *consulta = calloc(1, sizeof(tConsulta));
     consulta->lesoes=NULL;
     consulta->nlesoes=0;
     strcpy(consulta->nomedopaciente, RetornaNome(p));
@@ -112,4 +112,28 @@ void DesalocaConsulta(tConsulta *c)
     {
         free(c);
     }
+}
+
+void BinarioConsultas(void *dado, FILE *arq)
+{
+    tConsulta *c = (tConsulta*)dado;
+    fwrite(c, sizeof(tConsulta), 1, arq);
+    int i;
+    for(i=0 ; i<retornanlesoesconsulta(c) ; i++)
+    {
+        BinarioLesoes(c->lesoes[i], arq);
+    }
+}
+
+void *BC(FILE *arq)
+{
+    tConsulta *c = calloc(1, sizeof(tConsulta));
+    fread(c, sizeof(tConsulta), 1, arq);
+    c->lesoes = calloc(retornanlesoesconsulta(c), sizeof(void*));
+    int i;
+    for(i=0 ; i<retornanlesoesconsulta(c) ; i++)
+    {
+        c->lesoes[i] = BL(arq);
+    }
+    return (void*)c;
 }

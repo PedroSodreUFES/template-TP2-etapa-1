@@ -34,11 +34,12 @@ tPaciente *RetornaPacienteCadastrado(tSade *sade, char *cpf)
             return p;
         }
     }
+    return NULL;
 }
 
 tSade *CriaSade()
 {
-    tSade *sade = malloc(sizeof(tSade));
+    tSade *sade = calloc(1, sizeof(tSade));
     sade->nmedicos=0;
     sade->npacientes=0;
     sade->nsecretarios=0;
@@ -197,13 +198,6 @@ int CalculaIdadePessoa(tPaciente *p, char *dataatual)
     return idade;
 }
 
-
-/*struct _tSade
-{
-    void **secretarios, **medicos, **pacientes, **consultas, **lesoes;
-    int nsecretarios, nmedicos, npacientes, nconsultas, nlesoes;
-};*/
-
 void DesalocaSade(tSade *sade)
 {
     int i;
@@ -250,19 +244,100 @@ void DesalocaSade(tSade *sade)
     {
         free(sade->consultas);
     }
-
     if(sade!=NULL)
     {
         free(sade);
     }
 }
 
-void GeraBinario(tSade*sade)
+void GeraBinario(tSade *sade, char *path)
 {
+    char string[2000];
+    sprintf(string, "%s/%s", path, "pacientes.bin");
+    FILE *arq;
+    arq = fopen(string, "wb");
 
+    fwrite(&sade->nsecretarios, sizeof(int), 1, arq);
+    fwrite(&sade->nlesoes, sizeof(int), 1, arq);
+    fwrite(&sade->npacientes, sizeof(int), 1, arq);
+    fwrite(&sade->nconsultas, sizeof(int), 1, arq);
+    fwrite(&sade->nmedicos, sizeof(int), 1, arq);
+
+    int i;
+    for(i=0 ; i<obtemnsecretarios(sade) ; i++)
+    {
+        BinarioSecretario(sade->secretarios[i], arq);
+    }
+
+    for(i=0 ; i<obtemnmedicos(sade) ; i++)
+    {
+        BinarioMedico(sade->medicos[i], arq);
+    }
+
+    for(i=0 ; i<obtemnpacientes(sade) ; i++)
+    {
+        BinarioPaciente(sade->pacientes[i] , arq);
+    }
+
+    for(i=0 ; i<obtemnlesoes(sade) ; i++)
+    {
+        BinarioLesoes(sade->lesoes[i], arq);
+    }
+
+    for(i=0 ; i<obtemnconsultas(sade) ; i++)
+    {
+        BinarioConsultas(sade->consultas[i], arq);
+    }
+    fclose(arq);
 }
 
-tSade *LeSade(tSade *sade, FILE *arquivo)
+tSade *LeSade(FILE *arq)
 {
+    printf("cheguei\n");
+    tSade *sade = CriaSade();
+
     
+    fread(&sade->nsecretarios, sizeof(int), 1, arq);
+    fread(&sade->nlesoes, sizeof(int), 1, arq);
+    fread(&sade->npacientes, sizeof(int), 1, arq);
+    fread(&sade->nconsultas, sizeof(int), 1, arq);
+    fread(&sade->nmedicos, sizeof(int), 1, arq);
+    
+
+    sade->secretarios = (void**)malloc(obtemnsecretarios(sade) * sizeof(void*));
+    sade->medicos = (void**)malloc(obtemnmedicos(sade) * sizeof(void*));
+    sade->pacientes = (void**)malloc(obtemnpacientes(sade) * sizeof(void*));
+    sade->lesoes = (void**)malloc(obtemnlesoes(sade) * sizeof(void*));
+    sade->consultas = (void**)malloc(obtemnconsultas(sade) * sizeof(void*));
+
+
+    int i;
+
+    //LE SECRETARIOS
+    for(i=0 ; i<obtemnsecretarios(sade) ; i++)
+    {
+        sade->secretarios[i] = SB(arq);
+    }
+
+    for(i=0 ; i<obtemnmedicos(sade) ; i++)
+    {
+        sade->medicos[i] = BM(arq);
+    }
+
+    for(i=0 ; i<obtemnpacientes(sade) ; i++)
+    {
+        sade->pacientes[i] = BP(arq);
+    }
+
+    for(i=0 ; i<obtemnlesoes(sade) ; i++)
+    {
+        sade->lesoes[i] = BL(arq);
+    }
+
+    for(i=0 ; i<obtemnconsultas(sade) ; i++)
+    {
+        sade->consultas[i] = BC(arq);
+    }
+
+    return sade;
 }

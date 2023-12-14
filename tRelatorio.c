@@ -72,6 +72,7 @@ tRelatorio *CriaRelatorio(tSade *sade)
     relatorio->numerodelesoes = obtemnlesoes(sade);
     relatorio->numerocrioterapia = CRIOTERAPIAS;
     relatorio->numerocirurgias = CIRURGIAS;
+    return relatorio;
 }
 
 void imprimeEmArquivoRelatorio(void *dado, char *path)

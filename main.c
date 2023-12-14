@@ -25,12 +25,6 @@ int main(int argc, char** argv)
 
     //Sade
     tSade *sade;
-
-    //Medico que for usar o programa
-    tMedico *usuariomedico;
-
-    //Secretario que for usar o programa
-    tSecretario *usuariosecretario;
     
     //Vetor de FILE
     tFila *fila = criaFila();
@@ -42,14 +36,13 @@ int main(int argc, char** argv)
     ..................
     */
     printf("################################################\nDIGITE O CAMINHO DO BANCO DE DADOS: ");
-    scanf("%s%*c", string);
+    scanf("%[^\n]%*c", string);
     printf("################################################\n");
     printf("Caminho do banco de dados: %s/%s\n", argv[1], string);
-    sprintf(string2, "%s/%s", argv[1], string);
+    sprintf(string2, "%s/%s", argv[1], "pacientes.bin");
     printf("Caminho do arquivo saida: %s/saida\n", argv[1]);
-    arq = fopen(string, "rb");
-
-
+    arq = fopen(string2, "rb");
+    
     /*
     ..............................
     SE O BANCO DE DADOS NAO EXISTE
@@ -68,7 +61,7 @@ int main(int argc, char** argv)
     */
     else
     {
-        LeSade(sade, arq);
+        sade = LeSade(arq);
     }
     /*
     ..............................
@@ -245,7 +238,6 @@ int main(int argc, char** argv)
             {
                 PrintaMenuConsulta();
                 scanf("%d%*c", &opcao);
-                int coletado =0;
                 //CADASTRA LESAO
                 if(opcao==1)
                 {
@@ -286,7 +278,6 @@ int main(int argc, char** argv)
                     insereDocumentoFila(fila, (void*)re, imprimeNaTelaReceita, imprimeEmArquivoReceita, desalocaReceita);
                     printf("RECEITA ENVIADA PARA FILA DE IMPRESSAO. PRESSIONE QUALQUER TECLA PARA RETORNAR AO MENU ANTERIOR\n############################################################\n");
                     scanf("%c%*c", &botao);
-                    coletado=1;
                 }
 
                 //PEDE BIÓPSIA
@@ -342,6 +333,7 @@ int main(int argc, char** argv)
             if(!BuscaNpacientes(b))
             {
                 printf("NENHUM PACIENTE FOI ENCONTRADO. PRESSIONE QUALQUER TECLA PARA RETORNAR AO MENU ANTERIOR \n############################################################\n");
+                desalocaBusca(b);
                 scanf("%c%*c", &botao);
                 continue;
             }
@@ -426,9 +418,12 @@ int main(int argc, char** argv)
             break;
         }
     }
-    GeraBinario(sade);
+    GeraBinario(sade, argv[1]);
     DesalocaSade(sade);
     desalocaFila(fila);
-    fclose(arq);
+    if(arq!=NULL)
+    {
+        fclose(arq);
+    }
     return 0;
 }

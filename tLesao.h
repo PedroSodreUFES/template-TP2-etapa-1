@@ -1,6 +1,9 @@
 #ifndef _TLESAO_H_
 #define _TLESAO_H_
 
+#include <stdlib.h>
+#include <stdio.h>
+
 typedef struct _tlesao tLesao;
 
 tLesao *CadastraLesao();
@@ -22,5 +25,9 @@ int retornalesaocrioterapia(tLesao *lesao);
 tLesao *ClonaLesao(tLesao *lesao);
 
 void DesalocaLesao(tLesao *lesao);
+
+void BinarioLesoes(void *dado, FILE *arq);
+
+void *BL(FILE* arq);
 
 #endif

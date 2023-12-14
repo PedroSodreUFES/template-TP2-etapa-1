@@ -4,6 +4,8 @@
 #include "tPaciente.h"
 #include "tMedico.h"
 #include "tLesao.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef struct _tConsulta tConsulta;
 
@@ -28,5 +30,9 @@ int NaoPrecisaCirurgia(tConsulta *c);
 char *ConsultaCPF(tConsulta *c);
 
 void DesalocaConsulta(tConsulta *c);
+
+void BinarioConsultas(void *dado, FILE *arq);
+
+void *BC(FILE *arq);
 
 #endif

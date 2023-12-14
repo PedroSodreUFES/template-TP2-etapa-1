@@ -66,7 +66,7 @@ void imprimeEmArquivoEncaminhamento(void *dado, char *path)
     fprintf(arq, "PACIENTE: %s\n", b->nomepaciente);
     fprintf(arq, "CPF: %s\n\n", b->cpf);
     fprintf(arq, "ESPECIALIDADE ENCAMINHADA: %s\n", b->especialidade);
-    fprintf(arq, "MOTIVO: %s\n\n", b->especialidade);
+    fprintf(arq, "MOTIVO: %s\n\n", b->motivo);
     fprintf(arq, "%s (%s)\n", b->nomedomedico, b->crm);
     fprintf(arq, "%s\n\n", b->data);
     fclose(arq);

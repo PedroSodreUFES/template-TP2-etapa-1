@@ -28,6 +28,7 @@ tBiopsia *CriaBiopsia(tConsulta *consulta, char *cpf)
         }
     }
     b->crmmedico[0]='\0';
+    return b;
 }
 
 void InsereLesaoBiopsia(tBiopsia *biopsia, tLesao *lesao)

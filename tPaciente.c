@@ -10,7 +10,7 @@ struct _tPaciente{
 
 tPaciente *CriaPaciente()
 {
-    tPaciente *p = malloc(sizeof(tPaciente));
+    tPaciente *p = calloc(1, sizeof(tPaciente));
     if(p==NULL)
     {
         printf("PACIENTE NAO ALOCADO\n");
@@ -75,4 +75,17 @@ int obtemSeFoiConsultado(tPaciente *p)
 char *ObtemGeneroPaciente(tPaciente *p)
 {
     return p->genero;
+}
+
+void BinarioPaciente(void *dado, FILE *arq)
+{
+    tPaciente *p = (tPaciente*)dado;
+    fwrite(p, sizeof(tPaciente), 1, arq);
+}
+
+void *BP(FILE *arq)
+{
+    tPaciente *p = calloc(1, sizeof(tPaciente));
+    fread(p, sizeof(tPaciente), 1, arq);
+    return (void*)p;
 }

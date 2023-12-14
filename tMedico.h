@@ -1,6 +1,9 @@
 #ifndef _TMEDICO_H_
 #define _TMEDICO_H_
 
+#include <stdlib.h>
+#include <stdio.h>
+
 typedef struct _tMedico tMedico;
 
 tMedico *CriaMedico();
@@ -18,5 +21,9 @@ char *retornasenhamedico(tMedico *m);
 char *retornanomemedico(tMedico *m);
 
 char *retornacrmmedico(tMedico *m);
+
+void BinarioMedico(void *dado, FILE *arq);
+
+void *BM(FILE *arq);
 
 #endif
